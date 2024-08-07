@@ -5,12 +5,134 @@ description = "Data engineering course"
 authors = ["Daniil Trotsenko <daniil.trotsenko.dev@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
-pytest = "^8.3.2"
 
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.8.0"
+ruff = "^0.5.6"
+mypy = "^1.11.1"
+pytest = "^8.3.2"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 100
+indent-width = 4
+
+target-version = "py312"
+
+# Exclude a variety of commonly ignored directories.
+extend-exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "migrations",
+    ".venv",
+    "venv",
+    "env",
+    "ve",
+]
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+unfixable = []
+
+# Read more here https://beta.ruff.rs/docs/rules/
+# By default, Ruff enables Flake8's E and F rules
+# Pyflakes - F, pycodestyle - E, W
+# flake8-builtins - A
+# Pylint - PLC, PLE, PLW
+# isort - I
+select = [
+    "E",
+    "F",
+    "W",
+    "A",
+    "PLR",
+    "PLC",
+    "PLE",
+    "PLW",
+    "I",
+    "N",
+    "UP",
+    "S",
+    "COM",
+    "C4",
+    "EM",
+    "LOG",
+    "G",
+    "T20",
+    "Q",
+    "RET",
+    "SLF",
+    "SIM",
+    "TID",
+    "ARG",
+    "PTH",
+    "RUF",
+]
+ignore = [
+    "COM812",
+    "W291",
+    "S101",
+    "RUF012",
+    "PTH118",
+    "PLR0913",
+]
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+
+[tool.mypy]
+enable_error_code = [
+    "truthy-bool",
+    "truthy-iterable",
+    "redundant-expr",
+    "unused-awaitable",
+    "ignore-without-code",
+    "possibly-undefined",
+    "redundant-self",
+]
+exclude = [
+    "test_*",
+]
+explicit_package_bases = true
+ignore_missing_imports = true
+strict = true
+warn_unreachable = true

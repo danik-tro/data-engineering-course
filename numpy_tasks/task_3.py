@@ -38,3 +38,64 @@ Deliverables:
 A Python script (.py file) containing all the functions, along with the code to create the initial
 array and execute all manipulations.
 """
+
+from typing import Any
+
+import numpy as np
+import numpy.typing as npt
+
+
+def create_random_array() -> npt.NDArray[Any]:
+    np.random.seed(42)
+    return np.random.randint(1, 100, size=(6, 6))
+
+
+def transpose_array(array: npt.NDArray[Any]) -> npt.NDArray[Any]:
+    return np.transpose(array)
+
+
+def reshape_array(array: npt.NDArray[Any], new_shape: tuple[int, int]) -> npt.NDArray[Any]:
+    return np.reshape(array, new_shape)
+
+
+def split_array(array: npt.NDArray[Any], num_splits: int, axis: int = 0) -> list[npt.NDArray[Any]]:
+    return np.array_split(array, num_splits, axis=axis)
+
+
+def combine_arrays(arrays: list[npt.NDArray[Any]], axis: int = 0) -> npt.NDArray[Any]:
+    return np.concatenate(arrays, axis=axis)
+
+
+def print_array(array: npt.NDArray[Any], message: str = "Array:") -> None:
+    print(f"{message}\n{array}\n")
+
+
+def workflow(prints: bool = False) -> Any:
+    initial_array = create_random_array()
+
+    if prints:
+        print_array(initial_array, "Initial 6x6 Array:")
+
+    transposed_array = transpose_array(initial_array)
+    if prints:
+        print_array(transposed_array, "Transposed Array:")
+
+    reshaped_array = reshape_array(transposed_array, (3, 12))
+    if prints:
+        print_array(reshaped_array, "Reshaped Array (3x12):")
+
+    split_arrays = split_array(reshaped_array, 3, axis=0)
+    for i, arr in enumerate(split_arrays):
+        if prints:
+            print_array(arr, f"Split Array {i+1}:")
+
+    combined_array = combine_arrays(split_arrays, axis=0)
+
+    if prints:
+        print_array(combined_array, "Combined Array:")
+
+    return initial_array, transposed_array, reshaped_array, split_arrays, combined_array
+
+
+if __name__ == "__main__":
+    workflow(prints=True)

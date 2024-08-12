@@ -32,3 +32,32 @@ Deliverables:
 A Python script (.py file) containing all the functions along with
     the code to create the initial arrays and execute all manipulations.
 """
+
+from typing import Any
+
+import numpy as np
+import numpy.typing as npt
+
+
+def print_array(array: npt.NDArray[Any], message: str = "Array:") -> None:
+    print(f"{message} {array}\n")  # noqa: T201
+
+
+if __name__ == "__main__":
+    one_d_array = np.arange(1, 11)
+    print_array(one_d_array, "One-dimensional array:")
+
+    two_d_array = np.arange(1, 10).reshape(3, 3)
+    print_array(two_d_array, "Two-dimensional array (3x3):\n")
+
+    third_element = one_d_array[2]
+    print_array(third_element, "Third element of the one-dimensional array:")
+
+    sliced_array = two_d_array[:2, :2]
+    print_array(sliced_array, "First two rows and columns of the two-dimensional array:\n")
+
+    added_array = one_d_array + 5
+    print_array(added_array, "One-dimensional array after adding 5:\n")
+
+    multiplied_array = two_d_array * 2
+    print_array(multiplied_array, "Two-dimensional array after multiplying by 2:\n")

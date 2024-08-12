@@ -40,7 +40,7 @@ import numpy.typing as npt
 
 
 def print_array(array: npt.NDArray[Any], message: str = "Array:") -> None:
-    print(f"{message} {array}\n")  # noqa: T201
+    print(f"{message} {array}\n")
 
 
 if __name__ == "__main__":
